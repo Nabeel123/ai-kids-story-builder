@@ -41,11 +41,11 @@ const ViewStory = ({ params }: any) => {
           width={500}
           height={500}
           ref={bookRef}
+          size="stretch"
           maxWidth={600}
           maxHeight={600}
           startPage={0}
-          size="stretch"
-          style={{ margin: "auto" }}
+          style={{ marginTop: "20px", position: "relative", right: "40px" }}
           minWidth={300} // Default value for minWidth
           minHeight={300} // Default value for minHeight
           drawShadow={true} // Enable shadow drawing
@@ -80,7 +80,7 @@ const ViewStory = ({ params }: any) => {
           <div
             className="absolute -right-10 bottom-[220px] hover:scale-80 transition-all"
             onClick={() => {
-              bookRef.current?.pageFlip?.(); // Add optional chaining here
+              bookRef?.current.pageFlip().flipNext();
               setCount(count + 1);
             }}
           >
@@ -88,11 +88,11 @@ const ViewStory = ({ params }: any) => {
           </div>
         )}
 
-        {count !== 0 && (
+        {count != 0 && (
           <div
             className="absolute left-0 bottom-[220px] hover:scale-80 transition-all"
             onClick={() => {
-              bookRef.current?.pageFlip?.(); // Add optional chaining here
+              bookRef?.current.pageFlip().flipPrev();
               setCount(count - 1);
             }}
           >
