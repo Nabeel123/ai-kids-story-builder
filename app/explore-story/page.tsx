@@ -31,7 +31,7 @@ const Explore = () => {
       // Append new stories only if they are not already in the storyList
       setStoryList((prev) => {
         const updatedList = [...prev, ...result].reduce((acc, story) => {
-          if (!acc.some((s) => s.id === story.id)) {
+          if (!acc.some((s: any) => s.id === story.id)) {
             acc.push(story); // Ensure uniqueness based on 'id'
           }
           return acc;

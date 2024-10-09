@@ -17,7 +17,7 @@ const ViewStory = ({ params }: any) => {
     getStory();
   }, []);
 
-  const bookRef = useRef(0);
+  const bookRef = useRef<{ pageFlip: () => void } | any>(0);
 
   const getStory = async () => {
     // Fetch story from db based on params.storyId
@@ -41,6 +41,27 @@ const ViewStory = ({ params }: any) => {
           width={500}
           height={500}
           ref={bookRef}
+          maxWidth={600}
+          maxHeight={600}
+          startPage={0}
+          size="stretch"
+          style={{ margin: "auto" }}
+          minWidth={300} // Default value for minWidth
+          minHeight={300} // Default value for minHeight
+          drawShadow={true} // Enable shadow drawing
+          flippingTime={1000} // Time for the flip animation in milliseconds
+          usePortrait={true} // Ensure portrait mode is enabled
+          autoSize={true} // Automatically adjust size
+          showPageCorners={true} // Show page corners for flipping
+          swipeDistance={30} // Minimum swipe distance for flipping
+          startZIndex={0} // Added startZIndex
+          maxShadowOpacity={0.5} // Added maxShadowOpacity
+          clickEventForward={false} // Added clickEventForward
+          disableFlipByClick={false} // Added disableFlipByClick
+          mobileScrollSupport={true} // Added mobileScrollSupport
+          onFlip={() => {}} // Added onFlip handler
+          onChangeOrientation={() => {}} // Added onChangeOrientation handler
+          onChangeState={() => {}} // Added onChangeState handler
         >
           <div>
             <Bookcover imageUrl={story?.coverImage} />
@@ -59,7 +80,7 @@ const ViewStory = ({ params }: any) => {
           <div
             className="absolute -right-10 bottom-[220px] hover:scale-80 transition-all"
             onClick={() => {
-              bookRef?.current.pageFlip().flipNext();
+              bookRef.current?.pageFlip?.(); // Add optional chaining here
               setCount(count + 1);
             }}
           >
@@ -67,11 +88,11 @@ const ViewStory = ({ params }: any) => {
           </div>
         )}
 
-        {count != 0 && (
+        {count !== 0 && (
           <div
             className="absolute left-0 bottom-[220px] hover:scale-80 transition-all"
             onClick={() => {
-              bookRef?.current.pageFlip().flipPrev();
+              bookRef.current?.pageFlip?.(); // Add optional chaining here
               setCount(count - 1);
             }}
           >
