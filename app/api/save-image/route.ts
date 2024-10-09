@@ -3,9 +3,10 @@ import axios from "axios";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { NextRequest, NextResponse } from "next/server";
 
+// POST function for handling the API route
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json(); // Await req.json()
+    const data = await req.json();
     const { url }: any = data;
 
     // Convert image to base64 encoded string
@@ -37,12 +38,12 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Convert image URL to base64
-export const convertImage = async (imageUrl: string) => {
+// Helper function to convert image URL to base64
+const convertImage = async (imageUrl: string) => {
   try {
     const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
     const base64 = Buffer.from(response.data).toString("base64");
-    return base64; // return only the base64 string
+    return base64;
   } catch (error) {
     console.error("Error converting image:", error);
     return null;
