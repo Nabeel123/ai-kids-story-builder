@@ -26,5 +26,5 @@ export const Users = pgTable("users", {
   userName: varchar("username"),
   userEmail: varchar("userEmail"),
   userImage: varchar("userImage"),
-  credit: integer("credit").default(3),
+  credit: integer("credit").default(1),
 });
